@@ -54,7 +54,7 @@ int main() {
     int n;
 
     printf("Введите размер динамического массива >= 0:\n");
-    //scanf("%d", &n);
+    scanf("%d", &n);
 
     if (n <= 0) {
         printf("Некорректный размер массива.\n");
@@ -65,8 +65,7 @@ int main() {
 
     printf("Введите элементы массива (целые числа):\n");
         for (int i = 0; i < n; i++) {
-            //scanf("%d", &arr[i]);
-            arr[i]=9;
+            scanf("%d", &arr[i]);
     }
 
     printf("Минимум: %d\n", minimum(arr, n));
