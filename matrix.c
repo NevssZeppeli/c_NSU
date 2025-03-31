@@ -69,23 +69,23 @@ Matrix invert(Matrix m) {
     float detM = det(m);
     if (detM == 0) {
         printf("Определитель матрицы равен нулю, обратную найти невозможно.\n");
-        exit(-1);
+    } else {
+    
+        float invDet = 1.0/detM;
+
+        inverted.data[0][0] = (m.data[1][1] * m.data[2][2] - m.data[1][2] * m.data[2][1]) * invDet;
+        inverted.data[0][1] = (m.data[0][2] * m.data[2][1] - m.data[0][1] * m.data[2][2]) * invDet;
+        inverted.data[0][2] = (m.data[0][1] * m.data[1][2] - m.data[0][2] * m.data[1][1]) * invDet;
+        inverted.data[1][0] = (m.data[1][2] * m.data[2][0] - m.data[1][0] * m.data[2][2]) * invDet;
+        inverted.data[1][1] = (m.data[0][0] * m.data[2][2] - m.data[0][2] * m.data[2][0]) * invDet;
+        inverted.data[1][2] = (m.data[0][2] * m.data[1][0] - m.data[0][0] * m.data[1][2]) * invDet;
+        inverted.data[2][0] = (m.data[1][0] * m.data[2][1] - m.data[1][1] * m.data[2][0]) * invDet;
+        inverted.data[2][1] = (m.data[0][1] * m.data[2][0] - m.data[0][0] * m.data[2][1]) * invDet;
+        inverted.data[2][2] = (m.data[0][0] * m.data[1][1] - m.data[0][1] * m.data[1][0]) * invDet;
+
+        matrix_to_file(inverted, "inverted_matrix.txt");
+        return inverted;
     }
-
-    float invDet = 1.0/detM;
-
-    inverted.data[0][0] = (m.data[1][1] * m.data[2][2] - m.data[1][2] * m.data[2][1]) * invDet;
-    inverted.data[0][1] = (m.data[0][2] * m.data[2][1] - m.data[0][1] * m.data[2][2]) * invDet;
-    inverted.data[0][2] = (m.data[0][1] * m.data[1][2] - m.data[0][2] * m.data[1][1]) * invDet;
-    inverted.data[1][0] = (m.data[1][2] * m.data[2][0] - m.data[1][0] * m.data[2][2]) * invDet;
-    inverted.data[1][1] = (m.data[0][0] * m.data[2][2] - m.data[0][2] * m.data[2][0]) * invDet;
-    inverted.data[1][2] = (m.data[0][2] * m.data[1][0] - m.data[0][0] * m.data[1][2]) * invDet;
-    inverted.data[2][0] = (m.data[1][0] * m.data[2][1] - m.data[1][1] * m.data[2][0]) * invDet;
-    inverted.data[2][1] = (m.data[0][1] * m.data[2][0] - m.data[0][0] * m.data[2][1]) * invDet;
-    inverted.data[2][2] = (m.data[0][0] * m.data[1][1] - m.data[0][1] * m.data[1][0]) * invDet;
-
-    matrix_to_file(inverted, "inverted_matrix.txt");
-    return inverted;
 }
 
 //сумма матрица
