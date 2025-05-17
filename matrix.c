@@ -64,7 +64,7 @@ float det(Matrix m) {
 
 //обратная матрица
 Matrix invert(Matrix m) {
-    Matrix inverted;
+    Matrix inverted = {0};
 
     float detM = det(m);
     if (detM == 0) {
@@ -86,6 +86,7 @@ Matrix invert(Matrix m) {
         matrix_to_file(inverted, "inverted_matrix.txt");
         return inverted;
     }
+    return m; //upd 17.05.25: добавил строчку, чтобы избежать undefined behavior
 }
 
 //сумма матрица
