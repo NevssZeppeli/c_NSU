@@ -1,4 +1,82 @@
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdbool.h>
+
+#define MAX_SIZE 1024
+
+
+void correct(char* text) {
+    char result[MAX_SIZE] = {0};
+    int i, j = 0;
+    bool spaceFlag = false;
+    bool capitalizeNext = true;
+
+    for (i = 0; text[i] != '\0' && j < MAX_SIZE - 1; i++) {
+       
+        if (isspace(text[i])) {
+            if (!spaceFlag && j > 0) {
+                result[j++] = ' ';
+                spaceFlag = true;
+            }
+            continue;
+        }
+
+     
+        if (j > 0 && (text[i] == '.' || text[i] == ',' || text[i] == '!' || text[i] == '?') 
+            && result[j-1] == ' ') {
+            j--;
+        }
+
+        
+        if (j > 0 && (result[j-1] == '.' || result[j-1] == ',' || result[j-1] == '!' || result[j-1] == '?') 
+            && text[i] != ' ' && j < MAX_SIZE - 1) {
+            result[j++] = ' ';
+        }
+
+
+        if (capitalizeNext && isalpha(text[i])) {
+            result[j++] = toupper(text[i]);
+            capitalizeNext = false;
+        } else {
+            result[j++] = tolower(text[i]);
+        }
+
+   
+        if (text[i] == '.' || text[i] == '!' || text[i] == '?') {
+            capitalizeNext = true;
+        }
+
+        spaceFlag = false;
+    }
+
+    strncpy(text, result, MAX_SIZE);
+    text[MAX_SIZE - 1] = '\0';
+}
+
+
+/* Раскомментировать в случае использования программы как самостоятельной.
+int main() {
+    char text[MAX_SIZE];
+
+    printf("Введите текст (максимум %d символов):\n", MAX_SIZE - 1);
+    fgets(text, MAX_SIZE, stdin);
+
+    correctText(text);
+
+    printf("Исправленный текст:\n%s\n", text);
+
+    return 0;
+}
+*/
+
+/*
+Ниже я приведу мой исходный код в закомментированном виде. Код выдавал баг - съедал буквы в тексте.
+С чем был связан баг, мне доподлинно неизвестно, и времени на его искоренение не было. Однако для сохранения он будет ниже.
+*/
+
+/*
+#include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 
@@ -64,3 +142,4 @@ int main() {
     
     return 0;
 }
+*/
